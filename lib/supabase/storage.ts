@@ -1,10 +1,14 @@
-import { createClient } from '@/lib/supabase/client'
 import { validateImageFile } from '@/lib/utils'
+import {
+  JOB_IMAGES_BUCKET,
+  uploadImageServerAction,
+  deleteImageServerAction,
+} from '@/app/actions/upload'
 
-export const JOB_IMAGES_BUCKET = 'job-images'
+export { JOB_IMAGES_BUCKET }
 
 /**
- * Uploads an image file to the `job-images` bucket in Supabase Storage.
+ * Uploads an image file to the `job-images` bucket in Supabase Storage via Server Action.
  *
  * @param file The image File object to upload.
  * @returns The public URL of the uploaded image.
@@ -17,31 +21,16 @@ export async function uploadJobImage(file: File): Promise<string> {
     throw new Error(validation.error || 'Tệp ảnh không hợp lệ.')
   }
 
-  const supabase = createClient()
+  // 2. Prepare FormData and call server action
+  const formData = new FormData()
+  formData.append('file', file)
 
-  // 2. Generate unique file path with random UUID
-  const fileExt = file.name.split('.').pop()?.toLowerCase() || 'jpg'
-  const fileName = `${crypto.randomUUID()}.${fileExt}`
-  const filePath = `jobs/${fileName}`
-
-  // 3. Upload file to Supabase Storage
-  const { data, error } = await supabase.storage
-    .from(JOB_IMAGES_BUCKET)
-    .upload(filePath, file, {
-      cacheControl: '3600',
-      upsert: false,
-    })
-
-  if (error) {
-    throw new Error(`Lỗi khi tải ảnh lên Supabase Storage: ${error.message}`)
+  const res = await uploadImageServerAction(formData)
+  if (res.error || !res.url) {
+    throw new Error(res.error || 'Lỗi khi tải ảnh lên Supabase Storage.')
   }
 
-  // 4. Retrieve and return the public URL
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from(JOB_IMAGES_BUCKET).getPublicUrl(data.path)
-
-  return publicUrl
+  return res.url
 }
 
 /**
@@ -54,28 +43,11 @@ export async function deleteJobImage(urlOrPath: string): Promise<boolean> {
   if (!urlOrPath) return false
 
   try {
-    const supabase = createClient()
-    let relativePath = urlOrPath
-
-    if (urlOrPath.includes(JOB_IMAGES_BUCKET)) {
-      const parts = urlOrPath.split(`${JOB_IMAGES_BUCKET}/`)
-      if (parts.length > 1) {
-        relativePath = parts[1]
-      }
-    }
-
-    const { error } = await supabase.storage
-      .from(JOB_IMAGES_BUCKET)
-      .remove([relativePath])
-
-    if (error) {
-      console.error('Lỗi khi xóa ảnh khỏi Storage:', error)
-      return false
-    }
-
-    return true
+    const res = await deleteImageServerAction(urlOrPath)
+    return res.success
   } catch (err) {
     console.error('Lỗi không xác định khi xóa ảnh:', err)
     return false
   }
 }
+

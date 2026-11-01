@@ -14,6 +14,7 @@ import {
   Shield,
   Loader2,
   Lock,
+  LogIn,
 } from "lucide-react"
 import { logoutAction } from "@/app/actions/auth"
 import { cn } from "@/lib/utils"
@@ -204,13 +205,13 @@ export function Header({ authUser }: HeaderProps) {
                 <ArrowRight className="h-4 w-4" />
               </button>
 
-              {/* Discreet Admin Login */}
+              {/* System Login Button */}
               <Link
                 href="/admin/login"
-                title="Dành cho Quản trị viên & Nhân viên"
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-background hover:bg-muted hover:border-border text-foreground px-3.5 py-2 text-sm font-semibold transition-all shadow-sm cursor-pointer"
               >
-                <Lock className="h-4 w-4" />
+                <LogIn className="h-4 w-4 text-red-600" />
+                <span>Đăng nhập</span>
               </Link>
             </div>
           )}
@@ -337,10 +338,10 @@ export function Header({ authUser }: HeaderProps) {
               <Link
                 href="/admin/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-1.5 py-2 text-xs text-muted-foreground hover:text-foreground"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-border bg-card text-foreground font-semibold text-sm hover:bg-muted transition-colors shadow-sm"
               >
-                <Lock className="h-3.5 w-3.5" />
-                <span>Đăng nhập dành cho Quản trị viên</span>
+                <LogIn className="h-4 w-4 text-red-600" />
+                <span>Đăng nhập hệ thống</span>
               </Link>
             )}
           </div>

@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 import { getCurrentProfile } from '@/lib/supabase/roles'
 import { slugify } from '@/lib/utils'
 import type { JobStatus, JobUpdate } from '@/types/database'
@@ -46,7 +46,7 @@ export async function createJob(
   }
 
   try {
-    const supabase = await createClient()
+    const supabase = createAdminClient()
 
     const { data: newJob, error: insertError } = await supabase
       .from('jobs')
@@ -123,7 +123,7 @@ export async function updateJob(
   }
 
   try {
-    const supabase = await createClient()
+    const supabase = createAdminClient()
 
     const updatePayload: JobUpdate = {
       title,
@@ -147,16 +147,22 @@ export async function updateJob(
       updatePayload.status = status
     }
 
-    const { error: updateError } = await supabase
+    const { data: updatedRows, error: updateError } = await supabase
       .from('jobs')
       .update(updatePayload)
       .eq('id', jobId)
+      .select('id')
 
     if (updateError) {
       return { error: `Cập nhật tin thất bại: ${updateError.message}` }
     }
 
+    if (!updatedRows || updatedRows.length === 0) {
+      return { error: 'Không tìm thấy tin việc làm cần cập nhật.' }
+    }
+
     revalidatePath('/admin/dashboard/jobs')
+    revalidatePath(`/admin/dashboard/jobs/${jobId}/edit`)
     revalidatePath('/tin-tuyen-dung')
     revalidatePath('/')
 
@@ -180,7 +186,7 @@ export async function deleteJob(jobId: string): Promise<JobActionState> {
     return { error: 'Vui lòng đăng nhập lại.' }
   }
 
-  const supabase = await createClient()
+  const supabase = createAdminClient()
 
   // Fetch the job to check author_id
   const { data: job, error: fetchError } = await supabase
@@ -236,7 +242,7 @@ export async function toggleJobStatus(jobId: string, currentStatus: JobStatus): 
   const nextStatus: JobStatus = currentStatus === 'published' ? 'draft' : 'published'
 
   try {
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     const { error } = await supabase
       .from('jobs')
       .update({ status: nextStatus, updated_at: new Date().toISOString() })

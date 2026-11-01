@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 import { getCurrentProfile } from '@/lib/supabase/roles'
 import type { ContactStatus } from '@/types/database'
 
@@ -12,7 +12,7 @@ export async function updateContactStatus(contactId: string, status: ContactStat
   }
 
   try {
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     const { error } = await supabase
       .from('contacts')
       .update({ status })

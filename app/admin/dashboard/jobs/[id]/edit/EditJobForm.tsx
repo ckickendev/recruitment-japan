@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useState } from 'react'
+import { useActionState, useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -36,6 +36,14 @@ export function EditJobForm({ job, categories }: EditJobFormProps) {
   const router = useRouter()
   const updateJobWithId = updateJob.bind(null, job.id)
   const [state, formAction, isPending] = useActionState(updateJobWithId, initialState)
+
+  // Redirect to back screen automatically when update succeeds
+  useEffect(() => {
+    if (state?.success) {
+      router.push('/admin/dashboard/jobs')
+      router.refresh()
+    }
+  }, [state?.success, router])
 
   const [title, setTitle] = useState(job.title || '')
   const [slug, setSlug] = useState(job.slug || '')
