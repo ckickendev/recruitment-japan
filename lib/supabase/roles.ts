@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import type { Profile, UserRole } from '@/types/database'
 
 export interface UserAuthContext {
@@ -21,23 +21,47 @@ export interface UserAuthContext {
 export async function getCurrentProfile(): Promise<UserAuthContext | null> {
   const supabase = await createClient()
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  let user = null
+  try {
+    const { data } = await supabase.auth.getUser()
+    user = data?.user ?? null
+  } catch {
+    return null
+  }
 
   if (!user) {
     return null
   }
 
   // Fetch role from profiles table
+  let profileData: Profile | null = null
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single()
 
-  // Default fallback profile if trigger hasn't fired yet
-  const userProfile: Profile = profile || {
+  profileData = (profile as Profile) || null
+
+  // Fallback: If RLS blocked reading profile, use service role admin client on server
+  if (!profileData && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    try {
+      const adminClient = createAdminClient()
+      const { data: adminProfile } = await adminClient
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single()
+      if (adminProfile) {
+        profileData = adminProfile as Profile
+      }
+    } catch {
+      // Continue to metadata fallback
+    }
+  }
+
+  // Default fallback profile if trigger or fetch hasn't fired yet
+  const userProfile: Profile = profileData || {
     id: user.id,
     full_name: (user.user_metadata?.full_name as string) || user.email || 'Thành viên',
     phone: (user.user_metadata?.phone as string) || null,

@@ -24,19 +24,23 @@ ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
 -- 3. Automatic Trigger to create/sync profiles on new auth user creation
 CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER 
+LANGUAGE plpgsql 
+SECURITY DEFINER
+SET search_path = public, auth, pg_temp
+AS $$
 DECLARE
-    default_role user_role := 'user';
+    default_role public.user_role := 'user'::public.user_role;
     meta_role text;
 BEGIN
     meta_role := NEW.raw_user_meta_data->>'role';
 
     IF meta_role = 'admin' THEN
-        default_role := 'admin';
+        default_role := 'admin'::public.user_role;
     ELSIF meta_role = 'editor' THEN
-        default_role := 'editor';
+        default_role := 'editor'::public.user_role;
     ELSE
-        default_role := 'user';
+        default_role := 'user'::public.user_role;
     END IF;
 
     INSERT INTO public.profiles (id, full_name, phone, role, created_at)
@@ -53,8 +57,12 @@ BEGIN
         role = EXCLUDED.role;
 
     RETURN NEW;
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE WARNING 'handle_new_user failed for user %: %', NEW.id, SQLERRM;
+        RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
 
 -- Drop existing trigger if any and create trigger
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
@@ -86,14 +94,18 @@ END $$;
 
 -- 6. Helper Function: Check if user is admin
 CREATE OR REPLACE FUNCTION public.is_admin(user_id UUID)
-RETURNS BOOLEAN AS $$
+RETURNS BOOLEAN 
+LANGUAGE plpgsql 
+SECURITY DEFINER
+SET search_path = public, auth, pg_temp
+AS $$
 BEGIN
     RETURN EXISTS (
         SELECT 1 FROM public.profiles 
-        WHERE id = user_id AND role = 'admin'
+        WHERE id = user_id AND role = 'admin'::public.user_role
     );
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
 
 -- 7. Basic Row Level Security (RLS) Policies
 -- Profiles:

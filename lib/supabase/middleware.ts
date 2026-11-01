@@ -40,9 +40,13 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: Avoid writing any code between createServerClient and supabase.auth.getUser()
   // Always use getUser() instead of getSession() for secure server validation.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  let user = null
+  try {
+    const { data } = await supabase.auth.getUser()
+    user = data?.user ?? null
+  } catch {
+    user = null
+  }
 
   const pathname = request.nextUrl.pathname
 
