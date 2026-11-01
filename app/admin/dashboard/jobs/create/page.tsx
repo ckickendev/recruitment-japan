@@ -32,6 +32,14 @@ export default function CreateJobPage() {
   const router = useRouter()
   const [state, formAction, isPending] = useActionState(createJob, initialState)
 
+  // Auto-redirect to jobs list when job is created successfully
+  useEffect(() => {
+    if (state?.success) {
+      router.push('/admin/dashboard/jobs')
+      router.refresh()
+    }
+  }, [state?.success, router])
+
   const [title, setTitle] = useState('')
   const [slug, setSlug] = useState('')
   const [isManualSlug, setIsManualSlug] = useState(false)

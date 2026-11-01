@@ -1,11 +1,10 @@
 import { validateImageFile } from '@/lib/utils'
 import {
-  JOB_IMAGES_BUCKET,
   uploadImageServerAction,
   deleteImageServerAction,
 } from '@/app/actions/upload'
 
-export { JOB_IMAGES_BUCKET }
+export const JOB_IMAGES_BUCKET = 'job-images'
 
 /**
  * Uploads an image file to the `job-images` bucket in Supabase Storage via Server Action.

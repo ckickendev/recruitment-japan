@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase/server'
 import { getCurrentProfile } from '@/lib/supabase/roles'
 import { validateImageFile } from '@/lib/utils'
 
-export const JOB_IMAGES_BUCKET = 'job-images'
+const JOB_IMAGES_BUCKET = 'job-images'
 
 /**
  * Server Action to upload image file securely using Supabase admin client.

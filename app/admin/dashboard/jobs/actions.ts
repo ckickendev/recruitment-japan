@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { createAdminClient } from '@/lib/supabase/server'
 import { getCurrentProfile } from '@/lib/supabase/roles'
 import { slugify } from '@/lib/utils'
-import type { JobStatus, JobUpdate } from '@/types/database'
+import type { JobInsert, JobStatus, JobUpdate } from '@/types/database'
 
 export type JobActionState = {
   success?: boolean
@@ -34,7 +34,7 @@ export async function createJob(
   const working_hours = (formData.get('working_hours') as string)?.trim() || null
   const requirements = (formData.get('requirements') as string)?.trim() || null
   const benefits = (formData.get('benefits') as string)?.trim() || null
-  const content = (formData.get('content') as string)?.trim() || null
+  const content = (formData.get('content') as string)?.trim() || '<p></p>'
   const contact_info = (formData.get('contact_info') as string)?.trim() || null
   const category_id = (formData.get('category_id') as string)?.trim() || null
   const thumbnail_url = (formData.get('thumbnail_url') as string)?.trim() || null
@@ -48,27 +48,42 @@ export async function createJob(
   try {
     const supabase = createAdminClient()
 
-    const { data: newJob, error: insertError } = await supabase
+    const insertPayload: JobInsert = {
+      title,
+      slug,
+      salary,
+      location,
+      working_hours,
+      requirements,
+      benefits,
+      content,
+      contact_info,
+      category_id,
+      thumbnail_url,
+      status,
+      is_featured,
+      author_id: authContext.userId,
+      views_count: 0,
+    }
+
+    let { data: newJob, error: insertError } = await supabase
       .from('jobs')
-      .insert({
-        title,
-        slug,
-        salary,
-        location,
-        working_hours,
-        requirements,
-        benefits,
-        content,
-        contact_info,
-        category_id,
-        thumbnail_url,
-        status,
-        is_featured,
-        author_id: authContext.userId, // Automatically attach current user as author
-        views_count: 0,
-      })
+      .insert(insertPayload)
       .select('id')
       .single()
+
+    // Graceful fallback if author_id column has not been added to Supabase DB yet
+    if (insertError && insertError.message.includes('author_id')) {
+      const payloadWithoutAuthor = { ...insertPayload }
+      delete payloadWithoutAuthor.author_id
+      const retry = await supabase
+        .from('jobs')
+        .insert(payloadWithoutAuthor)
+        .select('id')
+        .single()
+      newJob = retry.data
+      insertError = retry.error
+    }
 
     if (insertError) {
       if (insertError.message.includes('unique constraint') || insertError.message.includes('slug')) {
@@ -111,7 +126,7 @@ export async function updateJob(
   const working_hours = (formData.get('working_hours') as string)?.trim() || null
   const requirements = (formData.get('requirements') as string)?.trim() || null
   const benefits = (formData.get('benefits') as string)?.trim() || null
-  const content = (formData.get('content') as string)?.trim() || null
+  const content = (formData.get('content') as string)?.trim() || '<p></p>'
   const contact_info = (formData.get('contact_info') as string)?.trim() || null
   const category_id = (formData.get('category_id') as string)?.trim() || null
   const thumbnail_url = (formData.get('thumbnail_url') as string)?.trim() || null
