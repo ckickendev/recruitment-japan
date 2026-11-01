@@ -56,7 +56,7 @@ export function JobApplicationForm({ jobId, jobTitle }: JobApplicationFormProps)
               Đăng Ký Thành Công!
             </h4>
             <p className="text-xs text-muted-foreground max-w-xs mx-auto leading-relaxed">
-              Global Career Gate đã tiếp nhận thông tin của bạn cho đơn tuyển dụng này. Chuyên viên sẽ sớm liên lạc qua điện thoại/Zalo.
+              LIFIX đã tiếp nhận thông tin của bạn cho đơn tuyển dụng này. Chuyên viên sẽ sớm liên lạc qua điện thoại/Zalo.
             </p>
           </div>
           <button
@@ -105,7 +105,7 @@ export function JobApplicationForm({ jobId, jobTitle }: JobApplicationFormProps)
               type="tel"
               name="phone"
               required
-              placeholder="0987654321"
+              placeholder="0945563357"
               className="w-full h-10 px-3 rounded-xl border border-border/80 bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500/50"
             />
           </div>
@@ -162,7 +162,7 @@ export function JobApplicationForm({ jobId, jobTitle }: JobApplicationFormProps)
 
         <div className="grid grid-cols-2 gap-2">
           <a
-            href="tel:0987654321"
+            href="tel:0945563357"
             className="flex items-center justify-center gap-1.5 h-10 rounded-xl border border-red-500/30 bg-red-50/70 hover:bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-950/70 text-xs font-semibold transition-colors"
           >
             <Phone className="h-3.5 w-3.5" />

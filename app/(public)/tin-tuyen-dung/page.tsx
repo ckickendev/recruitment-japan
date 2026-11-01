@@ -27,7 +27,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   }
 
   return {
-    title: `${title} | Global Career Gate`,
+    title: `${title} | LIFIX`,
     description:
       'Tổng hợp các đơn tuyển dụng kỹ sư IT, cơ khí, xây dựng, Tokutei Gino tại Nhật Bản với chế độ đãi ngộ cao và hỗ trợ visa toàn diện.',
   }
@@ -137,10 +137,10 @@ export default async function JobListingPage({ searchParams }: PageProps) {
                 {params.search
                   ? `Kết quả tìm kiếm cho "${params.search}"`
                   : currentCategoryName
-                  ? `Việc làm ngành ${currentCategoryName}`
-                  : currentLocationName
-                  ? `Cơ hội việc làm tại ${currentLocationName}`
-                  : 'Tất Cả Tin Tuyển Dụng'}
+                    ? `Việc làm ngành ${currentCategoryName}`
+                    : currentLocationName
+                      ? `Cơ hội việc làm tại ${currentLocationName}`
+                      : 'Tất Cả Tin Tuyển Dụng'}
               </h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 Tìm thấy <strong className="text-foreground font-bold">{total}</strong> vị trí tuyển dụng phù hợp

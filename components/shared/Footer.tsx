@@ -14,10 +14,10 @@ export function Footer() {
               </div>
               <div className="flex flex-col">
                 <span className="font-extrabold text-base tracking-tight text-white">
-                  GLOBAL <span className="text-red-500">CAREER GATE</span>
+                  LIFIX
                 </span>
                 <span className="text-[10px] font-medium tracking-wide text-slate-400 uppercase">
-                  Cổng Cơ Hội Việc Làm Nhật Bản
+                  Cơ Hội Việc Làm Nhật Bản
                 </span>
               </div>
             </Link>
@@ -81,20 +81,14 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-200">Trụ sở Đà Nẵng:</strong> 04 Nhơn Hoà 8
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
-                <span>
-                  <strong className="text-slate-200">Tokyo Office:</strong> 〒160-0023 Tokyo, Shinjuku City, Nishishinjuku 2-8-1
+                  <strong className="text-slate-200">Trụ sở Đà Nẵng:</strong> 04 Nhơn Hoà 8, An Khê, Đà Nẵng
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-red-500 shrink-0" />
                 <div>
                   <a
-                    href="tel:0987654321"
+                    href="tel:0945563357"
                     className="text-slate-200 hover:text-white font-medium"
                   >
                     Hotline: 094.556.3357
@@ -142,7 +136,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            © {new Date().getFullYear()} Global Career Gate. Toàn bộ bản quyền được bảo lưu.
+            © {new Date().getFullYear()} LIFIX Corp, Toàn bộ bản quyền được bảo lưu.
           </div>
           <div className="flex flex-wrap items-center gap-6">
             <Link href="/privacy" className="hover:text-slate-300 transition-colors">

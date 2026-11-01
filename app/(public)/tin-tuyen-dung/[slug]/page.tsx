@@ -40,11 +40,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!job) {
     return {
-      title: 'Không Tìm Thấy Tin Tuyển Dụng | Global Career Gate',
+      title: 'Không Tìm Thấy Tin Tuyển Dụng | LIFIX',
     }
   }
 
-  const title = `${job.title} | Global Career Gate`
+  const title = `${job.title} | LIFIX`
   const cleanSummary = job.requirements
     ? job.requirements.replace(/<[^>]*>?/gm, '').trim().slice(0, 160)
     : `Tuyển dụng ${job.title} tại ${job.location || 'Nhật Bản'}. Mức lương: ${job.salary || 'Hấp dẫn'}. Hỗ trợ thủ tục visa và xuất cảnh nhanh chóng.`
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description: cleanSummary,
       url: canonicalUrl,
-      siteName: 'Global Career Gate',
+      siteName: 'LIFIX',
       locale: 'vi_VN',
       type: 'article',
       images: [
@@ -163,7 +163,7 @@ export default async function JobDetailPage({ params }: PageProps) {
     description: plainDescription,
     identifier: {
       '@type': 'PropertyValue',
-      name: 'Global Career Gate',
+      name: 'LIFIX',
       value: job.id,
     },
     datePosted: job.created_at,
@@ -171,7 +171,7 @@ export default async function JobDetailPage({ params }: PageProps) {
     employmentType: 'FULL_TIME',
     hiringOrganization: {
       '@type': 'Organization',
-      name: 'Global Career Gate',
+      name: 'LIFIX',
       sameAs: siteUrl,
       logo: `${siteUrl}/og-default.jpg`,
     },
@@ -388,7 +388,7 @@ export default async function JobDetailPage({ params }: PageProps) {
             {/* Candidate Assurance Card */}
             <div className="rounded-2xl border border-border bg-card p-5 space-y-3 text-xs text-muted-foreground shadow-xs">
               <h4 className="font-bold text-sm text-foreground">
-                Quyền Lợi Ứng Viên Tại Global Career Gate
+                Quyền Lợi Ứng Viên Tại LIFIX
               </h4>
               <ul className="space-y-2.5">
                 {[

@@ -65,10 +65,10 @@ export function Header({ authUser }: HeaderProps) {
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-lg tracking-tight text-foreground sm:text-xl">
-              GLOBAL <span className="text-red-600 dark:text-red-500">CAREER GATE</span>
+              LIFIX
             </span>
             <span className="text-[10px] sm:text-xs font-medium tracking-wide text-muted-foreground uppercase">
-              Cổng Cơ Hội Việc Làm Nhật Bản
+              Cơ Hội Việc Làm Nhật Bản
             </span>
           </div>
         </Link>
@@ -102,7 +102,7 @@ export function Header({ authUser }: HeaderProps) {
         <div className="hidden lg:flex items-center gap-3">
           {/* Click to Call Hotline */}
           <a
-            href="tel:0987654321"
+            href="tel:0945563357"
             className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/70 hover:border-red-500/40 text-sm font-medium text-foreground hover:text-red-600 transition-colors group"
             title="Gọi Hotline tư vấn"
           >
@@ -220,7 +220,7 @@ export function Header({ authUser }: HeaderProps) {
         {/* Mobile Hamburger Button */}
         <div className="flex items-center gap-2 md:hidden">
           <a
-            href="tel:0987654321"
+            href="tel:0945563357"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-red-100 text-red-600 dark:bg-red-950/60 dark:text-red-400"
             aria-label="Gọi hotline"
           >
@@ -302,7 +302,7 @@ export function Header({ authUser }: HeaderProps) {
 
           <div className="pt-3 border-t border-border/60 flex flex-col gap-2.5">
             <a
-              href="tel:0987654321"
+              href="tel:0945563357"
               className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-border bg-card text-foreground font-medium text-sm hover:bg-muted"
             >
               <Phone className="h-4 w-4 text-red-600" />

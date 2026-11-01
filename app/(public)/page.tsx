@@ -243,7 +243,7 @@ export default async function HomePage() {
               Quy Trình Chuyên Nghiệp & Minh Bạch
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-              Tại Sao Lựa Chọn Global Career Gate?
+              Tại Sao Lựa Chọn LIFIX?
             </h2>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               Lộ trình 4 bước tinh gọn giúp bạn nắm bắt cơ hội việc làm chuẩn Nhật Bản với sự an tâm tuyệt đối

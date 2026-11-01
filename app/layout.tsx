@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Global Career Gate - Cổng Cơ Hội Việc Làm Nhật Bản",
+  title: "LIFIX - Cơ Hội Việc Làm Nhật Bản",
   description: "Cầu nối sự nghiệp chuyên nghiệp cho kỹ sư và lao động tay nghề cao tại Nhật Bản.",
 }
 

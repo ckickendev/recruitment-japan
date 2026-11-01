@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Phone, MessageCircle, X, Send, CheckCircle2, Loader2, Sparkles } from "lucide-react"
-import { createClient } from "@/lib/supabase/client"
+import { submitConsultationRequest } from "@/app/actions/contact"
 
 export function ContactWidget() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -43,19 +43,15 @@ export function ContactWidget() {
     setErrorMessage(null)
 
     try {
-      const supabase = createClient()
-      const { error } = await supabase.from("contacts").insert([
-        {
-          full_name: formData.full_name,
-          phone: formData.phone,
-          email: formData.email ? formData.email : null,
-          note: formData.note ? formData.note : null,
-          status: "pending",
-        },
-      ])
+      const res = await submitConsultationRequest({
+        full_name: formData.full_name,
+        phone: formData.phone,
+        email: formData.email,
+        note: formData.note,
+      })
 
-      if (error) {
-        throw error
+      if (res?.error) {
+        throw new Error(res.error)
       }
 
       setIsSuccess(true)
@@ -115,7 +111,7 @@ export function ContactWidget() {
             Gọi ngay 094.556.3357
           </span>
           <a
-            href="tel:0987654321"
+            href="tel:0945563357"
             className="flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-red-600 text-white shadow-lg shadow-red-600/30 hover:scale-110 active:scale-95 transition-transform relative"
             aria-label="Gọi hotline trực tiếp"
           >
@@ -152,7 +148,7 @@ export function ContactWidget() {
                   Đăng Ký Thành Công!
                 </h3>
                 <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
-                  Cảm ơn bạn đã quan tâm. Chuyên viên tư vấn của <strong>Global Career Gate</strong> sẽ liên hệ với bạn trong thời gian sớm nhất.
+                  Cảm ơn bạn đã quan tâm. Chuyên viên tư vấn của <strong>LIFIX</strong> sẽ liên hệ với bạn trong thời gian sớm nhất.
                 </p>
                 <button
                   type="button"
@@ -207,7 +203,7 @@ export function ContactWidget() {
                       <input
                         type="tel"
                         required
-                        placeholder="0987654321"
+                        placeholder="0945563357"
                         value={formData.phone}
                         onChange={(e) =>
                           setFormData({ ...formData, phone: e.target.value })

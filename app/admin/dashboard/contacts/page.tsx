@@ -8,7 +8,7 @@ import {
   FileText,
 } from 'lucide-react'
 import { getCurrentProfile } from '@/lib/supabase/roles'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 import { ContactStatusSelector } from '@/components/admin/ContactStatusSelector'
 import { formatDate } from '@/lib/utils'
 import type { ContactWithRelations } from '@/types/database'
@@ -20,7 +20,7 @@ export default async function AdminContactsPage() {
     return null
   }
 
-  const supabase = await createClient()
+  const supabase = createAdminClient()
 
   // Fetch contacts with linked job
   const { data: contactsData, error } = await supabase

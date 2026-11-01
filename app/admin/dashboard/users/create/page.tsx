@@ -146,7 +146,7 @@ export default function CreateUserPage() {
                   id="phone"
                   name="phone"
                   type="tel"
-                  placeholder="0987654321"
+                  placeholder="0945563357"
                   className="pl-9 bg-slate-900 border-slate-800 text-white placeholder:text-slate-500 focus-visible:ring-red-500/50"
                 />
               </div>
