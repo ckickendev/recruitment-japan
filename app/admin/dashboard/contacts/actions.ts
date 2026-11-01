@@ -19,6 +19,11 @@ export async function updateContactStatus(contactId: string, status: ContactStat
       .eq('id', contactId)
 
     if (error) {
+      if (error.message.includes('contacts_status_check')) {
+        return {
+          error: `Trạng thái "${status}" chưa được khai báo trong Database Supabase. Vui lòng chạy lệnh SQL cập nhật contacts_status_check.`,
+        }
+      }
       return { error: `Cập nhật trạng thái thất bại: ${error.message}` }
     }
 
