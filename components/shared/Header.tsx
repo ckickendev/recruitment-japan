@@ -111,7 +111,7 @@ export function Header({ authUser }: HeaderProps) {
             </div>
             <div className="text-left leading-tight pr-1">
               <div className="text-[10px] text-muted-foreground font-normal">Hotline 24/7</div>
-              <div className="font-semibold text-xs tracking-wide">0987.654.321</div>
+              <div className="font-semibold text-xs tracking-wide">094.556.3357</div>
             </div>
           </a>
 
@@ -306,7 +306,7 @@ export function Header({ authUser }: HeaderProps) {
               className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-border bg-card text-foreground font-medium text-sm hover:bg-muted"
             >
               <Phone className="h-4 w-4 text-red-600" />
-              <span>Hotline: 0987.654.321</span>
+              <span>Hotline: 094.556.3357</span>
             </a>
 
             {!authUser && (

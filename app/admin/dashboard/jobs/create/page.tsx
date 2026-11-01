@@ -252,7 +252,7 @@ export default function CreateJobPage() {
                 id="contact_info"
                 name="contact_info"
                 type="text"
-                placeholder="Hotline: 0987.654.321 | Email: hr@globalcareergate.com"
+                placeholder="Hotline: 094.556.3357 | Email: hr@globalcareergate.com"
                 className="bg-slate-900 border-slate-800 text-white placeholder:text-slate-500 focus-visible:ring-red-500/50"
               />
             </div>

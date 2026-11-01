@@ -108,7 +108,7 @@ async function handleSeed() {
             <li>Tinh thần trách nhiệm cao, khả năng làm việc nhóm linh hoạt.</li>
           </ul>
         `,
-        contact_info: 'Email: tuyendung@globalcareergate.com | Hotline: 0987.654.321',
+        contact_info: 'Email: tuyendung@globalcareergate.com | Hotline: 094.556.3357',
         status: 'published',
         is_featured: true,
         category_id: itCategory?.id || null,
@@ -132,7 +132,7 @@ async function handleSeed() {
             <li>Kinh nghiệm lập trình web/mobile tối thiểu 2 năm trước khi làm BrSE.</li>
           </ul>
         `,
-        contact_info: 'Email: brse@globalcareergate.com | Hotline: 0987.654.321',
+        contact_info: 'Email: brse@globalcareergate.com | Hotline: 094.556.3357',
         status: 'published',
         is_featured: true,
         category_id: itCategory?.id || null,
@@ -156,7 +156,7 @@ async function handleSeed() {
             <li>Có sức khỏe tốt, mong muốn làm việc lâu dài tại Nhật Bản.</li>
           </ul>
         `,
-        contact_info: 'Email: cokhi@globalcareergate.com | Hotline: 0987.654.321',
+        contact_info: 'Email: cokhi@globalcareergate.com | Hotline: 094.556.3357',
         status: 'published',
         is_featured: false,
         category_id: overseasCategory?.id || null,

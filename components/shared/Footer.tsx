@@ -34,7 +34,7 @@ export function Footer() {
             {/* Zalo CTA button in footer */}
             <div className="pt-2">
               <a
-                href="https://zalo.me/0987654321"
+                href="https://zalo.me/0945563357"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-blue-600/90 hover:bg-blue-600 text-white px-3.5 py-2 text-xs font-medium transition-colors shadow-sm"
@@ -81,7 +81,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-200">Trụ sở Hà Nội:</strong> Tầng 6, Tòa nhà Innovation, Cầu Giấy, Hà Nội
+                  <strong className="text-slate-200">Trụ sở Đà Nẵng:</strong> 04 Nhơn Hoà 8
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -97,7 +97,7 @@ export function Footer() {
                     href="tel:0987654321"
                     className="text-slate-200 hover:text-white font-medium"
                   >
-                    Hotline: 0987.654.321
+                    Hotline: 094.556.3357
                   </a>
                 </div>
               </li>

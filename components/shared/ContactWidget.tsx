@@ -99,7 +99,7 @@ export function ContactWidget() {
             Chat Zalo
           </span>
           <a
-            href="https://zalo.me/0987654321"
+            href="https://zalo.me/0945563357"
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-500/30 hover:scale-110 active:scale-95 transition-transform"
@@ -112,7 +112,7 @@ export function ContactWidget() {
         {/* Direct Call Button */}
         <div className="relative group flex items-center">
           <span className="hidden group-hover:inline-flex md:inline-flex items-center mr-2 px-3 py-1.5 rounded-full bg-slate-900 text-white text-xs font-medium shadow-md transition-all whitespace-nowrap">
-            Gọi ngay 0987.654.321
+            Gọi ngay 094.556.3357
           </span>
           <a
             href="tel:0987654321"

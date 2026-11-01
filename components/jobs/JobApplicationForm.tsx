@@ -166,11 +166,11 @@ export function JobApplicationForm({ jobId, jobTitle }: JobApplicationFormProps)
             className="flex items-center justify-center gap-1.5 h-10 rounded-xl border border-red-500/30 bg-red-50/70 hover:bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-950/70 text-xs font-semibold transition-colors"
           >
             <Phone className="h-3.5 w-3.5" />
-            <span>0987.654.321</span>
+            <span>094.556.3357</span>
           </a>
 
           <a
-            href="https://zalo.me/0987654321"
+            href="https://zalo.me/0945563357"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-1.5 h-10 rounded-xl border border-blue-500/30 bg-blue-50/70 hover:bg-blue-100 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400 dark:hover:bg-blue-950/70 text-xs font-semibold transition-colors"
